@@ -205,7 +205,6 @@ class Board extends React.Component {
     updatedData.map(datarow => {
       datarow.map(dataitem => {
         dataitem.isRevealed = true;
-        dataitem.styles = styles.cell;
       });
     });
     this.setState({
@@ -250,7 +249,6 @@ class Board extends React.Component {
     let updatedData = this.state.boardData;
     updatedData[x][y].isFlagged = false;
     updatedData[x][y].isRevealed = true;
-    updatedData[x][y].styles = styles.cellHidden;
 
     if (updatedData[x][y].isEmpty) {
       updatedData = this.revealEmpty(x, y, updatedData);
@@ -309,7 +307,7 @@ class Board extends React.Component {
     let array = this.initBoardData(height, width, mines);
     this.setState({
       boardData: array,
-      gameStatus: "Juguemos",
+      gameStatus: "EN JUEGO",
       mineCount: mines,
       started: true,
       paused: false

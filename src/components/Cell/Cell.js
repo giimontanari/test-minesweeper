@@ -1,7 +1,7 @@
 import React from "react";
 
 const styles = {
-  cell: {
+  cellHidden: {
     background: "#81c784",
     border: "1px solid #fff",
     float: "left",
@@ -10,11 +10,10 @@ const styles = {
     textAlign: "center",
     width: "45px",
     cursor: "pointer",
-    borderRadius: "5px",
     color: "#fff",
     fontWeight: "600"
   },
-  cellHidden: {
+  cellRevealed: {
     background: "#bdbdbd",
     border: "1px solid #fff",
     float: "left",
@@ -23,12 +22,11 @@ const styles = {
     textAlign: "center",
     width: "45px",
     cursor: "pointer",
-    borderRadius: "5px",
     color: "#fff",
     fontWeight: "600"
   },
   cellMine: {
-    background: "#cfd8dc",
+    background: "#e53935",
     border: "1px solid #fff",
     float: "left",
     lineHeight: "45px",
@@ -36,8 +34,7 @@ const styles = {
     textAlign: "center",
     width: "45px",
     cursor: "pointer",
-    borderRadius: "5px",
-    color: "#fc543c",
+    color: "#fff",
     fontWeight: "600"
   }
 };
@@ -64,7 +61,7 @@ export default class Cell extends React.Component {
     return (
       <div
         onClick={onClick}
-        style={value.isRevealed ? styles.cellHidden : styles.cell}
+        style={value.isRevealed ? styles.cellRevealed : styles.cellHidden}
         onContextMenu={cMenu}
       >
         {this.getValue()}
@@ -72,12 +69,3 @@ export default class Cell extends React.Component {
     );
   }
 }
-/*
-let className =
-  "cell" +
-  (value.isRevealed ? "" : " hidden") +
-  (value.isMine ? " is-mine" : "") +
-  (value.isFlagged ? " is-flag" : "");
-
-
-*/
