@@ -16,11 +16,11 @@ class Timer extends Component {
     const { started, paused, timeStart } = this.props;
     return (
       <TimerMachine
-        timeStart={1 * 1000} // start at 10 seconds
+        timeStart={1 * 1000}
         started={started}
         paused={paused}
-        countdown={false} // use as stopwatch
-        interval={1000} // tick every 1 second
+        countdown={false}
+        interval={1000}
         formatTimer={(time, ms) =>
           moment.duration(ms, "milliseconds").format("h:mm:ss", {
             trim: false
