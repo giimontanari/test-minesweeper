@@ -34,7 +34,7 @@ export const HEADER_MENU_ICON = "#FFFFFF";
 export const MUITHEME_CONST = {
   palette: {
     textColor: "#575756",
-    primary1Color: MAIN_COLOR_RGB,
+    primary1Color: "#212121",
     secondaryTextColor: "#757575",
     alternateTextColor: "#ffffff",
     disabledColor: "#70787D"
@@ -80,7 +80,7 @@ export const MUITHEME_CONST = {
   raisedButton: {
     fontSize: 12,
     height: 20,
-    primaryColor: MAIN_COLOR_RGB,
+    primaryColor: "#212121",
     secondaryColor: "#C230A4"
   },
   tableHeader: {

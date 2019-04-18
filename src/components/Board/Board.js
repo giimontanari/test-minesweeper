@@ -9,6 +9,9 @@ import Util, {
 import ic_success from "../../common/assets/ic_success.png";
 import ic_error from "../../common/assets/ic_error.png";
 import RaisedButton from "material-ui/RaisedButton";
+import Timer from "react-timer";
+
+const OPTIONS = { prefix: "seconds elapsed!", delay: 100 };
 
 const styles = {
   game: {
@@ -332,12 +335,14 @@ class Board extends React.Component {
         <div style={styles.gameHeader}>
           <h1 style={styles.header}>{this.state.gameStatus}</h1>
         </div>
-
         {this.renderBoard(this.state.boardData)}
         <RaisedButton
           label="Reiniciar Tablero"
           primary
-          style={{ marginLeft: "110px", marginTop: "20px" }}
+          style={{
+            marginLeft: "110px",
+            marginTop: "20px"
+          }}
           onClick={this.resetBoard}
         />
       </div>
