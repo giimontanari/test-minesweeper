@@ -9,9 +9,8 @@ import Util, {
 import ic_success from "../../common/assets/ic_success.png";
 import ic_error from "../../common/assets/ic_error.png";
 import RaisedButton from "material-ui/RaisedButton";
-import Timer from "react-timer";
-
-const OPTIONS = { prefix: "seconds elapsed!", delay: 100 };
+import Countdown from "react-countdown-now";
+import Timer from "../Timer/Timer";
 
 const styles = {
   game: {
@@ -32,6 +31,10 @@ const styles = {
   header: {
     display: "block",
     marginTop: "15px"
+  },
+  button: {
+    marginLeft: "110px",
+    marginTop: "20px"
   }
 };
 
@@ -44,8 +47,10 @@ class Board extends React.Component {
         this.props.width,
         this.props.mines
       ),
-      gameStatus: "Juguemos",
-      mineCount: this.props.mines
+      gameStatus: "EN JUEGO",
+      mineCount: this.props.mines,
+      started: true,
+      paused: false
     };
   }
 
@@ -171,35 +176,27 @@ class Board extends React.Component {
     if (x > 0) {
       el.push(data[x - 1][y]);
     }
-
     if (x < this.props.height - 1) {
       el.push(data[x + 1][y]);
     }
-
     if (y > 0) {
       el.push(data[x][y - 1]);
     }
-
     if (y < this.props.width - 1) {
       el.push(data[x][y + 1]);
     }
-
     if (x > 0 && y > 0) {
       el.push(data[x - 1][y - 1]);
     }
-
     if (x > 0 && y < this.props.width - 1) {
       el.push(data[x - 1][y + 1]);
     }
-
     if (x < this.props.height - 1 && y < this.props.width - 1) {
       el.push(data[x + 1][y + 1]);
     }
-
     if (x < this.props.height - 1 && y > 0) {
       el.push(data[x + 1][y - 1]);
     }
-
     return el;
   }
 
@@ -241,7 +238,11 @@ class Board extends React.Component {
       return null;
 
     if (this.state.boardData[x][y].isMine) {
-      this.setState({ gameStatus: "Ups perdiste!" });
+      this.setState({
+        gameStatus: "UPS PERDISTE!",
+        started: false,
+        paused: true
+      });
       this.revealBoard();
       Util.showNoty(ERROR, "Perdiste, ¡intentalo de nuevo!");
     }
@@ -256,7 +257,12 @@ class Board extends React.Component {
     }
 
     if (this.getHidden(updatedData).length === this.props.mines) {
-      this.setState({ mineCount: 0, gameStatus: "Ganaste!" });
+      this.setState({
+        mineCount: 0,
+        gameStatus: "¡GANASTE!",
+        started: false,
+        paused: true
+      });
       this.revealBoard();
       Util.showNoty(SUCCESS, "Ganaste. ¡Felicitaciones!");
     }
@@ -304,7 +310,9 @@ class Board extends React.Component {
     this.setState({
       boardData: array,
       gameStatus: "Juguemos",
-      mineCount: mines
+      mineCount: mines,
+      started: true,
+      paused: false
     });
   };
 
@@ -330,19 +338,18 @@ class Board extends React.Component {
   }
 
   render() {
+    const { hours, minutes, seconds } = this.state;
     return (
       <div style={styles.game}>
         <div style={styles.gameHeader}>
           <h1 style={styles.header}>{this.state.gameStatus}</h1>
+          <Timer started={this.state.started} paused={this.state.paused} />
         </div>
         {this.renderBoard(this.state.boardData)}
         <RaisedButton
           label="Reiniciar Tablero"
           primary
-          style={{
-            marginLeft: "110px",
-            marginTop: "20px"
-          }}
+          style={styles.button}
           onClick={this.resetBoard}
         />
       </div>
