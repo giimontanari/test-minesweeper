@@ -9,7 +9,6 @@ import Util, {
 import ic_success from "../../common/assets/ic_success.png";
 import ic_error from "../../common/assets/ic_error.png";
 import RaisedButton from "material-ui/RaisedButton";
-import Countdown from "react-countdown-now";
 import Timer from "../Timer/Timer";
 
 const styles = {
